@@ -8,20 +8,29 @@ const botaoDescansoCurto = document.querySelector('.app__card-button--curto');
 const botaoDescansoLongo = document.querySelector('.app__card-button--longo');
 const banner = document.querySelector('.app__image');
 const texto = document.querySelector('.app__title');
+const botoesLista = document.querySelectorAll('.app__card-button')
 
 botaoFoco.addEventListener('click', () => {
     alterarContexto(FOCO);
+    botaoFoco.classList.add('active');
 });
 
 botaoDescansoCurto.addEventListener('click', () => {
     alterarContexto(DESCANSO_CURTO);
+    botaoDescansoCurto.classList.add('active');
 });
 
 botaoDescansoLongo.addEventListener('click', () => {
     alterarContexto(DESCANSO_LONGO);
+    botaoDescansoLongo.classList.add('active');
 });
 
 function alterarContexto(contexto) {
+
+    botoesLista.forEach(function(contexto) {
+        contexto.classList.remove('active');
+    });
+
     html.setAttribute('data-contexto', contexto);
     banner.setAttribute('src', `/imagens/${contexto}.png`);
     modificarPorContexto(contexto);
