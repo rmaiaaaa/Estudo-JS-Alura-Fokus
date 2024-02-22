@@ -8,7 +8,19 @@ const botaoDescansoCurto = document.querySelector('.app__card-button--curto');
 const botaoDescansoLongo = document.querySelector('.app__card-button--longo');
 const banner = document.querySelector('.app__image');
 const texto = document.querySelector('.app__title');
-const botoesLista = document.querySelectorAll('.app__card-button')
+const botoesLista = document.querySelectorAll('.app__card-button');
+const musicSwitch = document.querySelector('#alternar-musica');
+const musicFile = new Audio('/sons/luna-rise-part-one.mp3');
+musicFile.loop = true;
+
+musicSwitch.addEventListener('change', () =>{
+
+    if(musicFile.paused){
+        musicFile.play();
+    }else{
+        musicFile.pause();
+    }
+})
 
 botaoFoco.addEventListener('click', () => {
     alterarContexto(FOCO);
@@ -35,7 +47,7 @@ function alterarContexto(contexto) {
     banner.setAttribute('src', `/imagens/${contexto}.png`);
     modificarPorContexto(contexto);
 
-}
+};
 
 function modificarPorContexto(contexto) {
 
@@ -64,4 +76,4 @@ function modificarPorContexto(contexto) {
             break;
     }
 
-}
+};
