@@ -3,6 +3,8 @@ const formAdicionarTarefa = document.querySelector('.app__form-add-task');
 const formTextArea = document.querySelector('.app__form-textarea');
 const ulTarefas = document.querySelector('.app__section-task-list');
 
+const botaoCancelForm = document.querySelector('.app__form-footer__button--cancel');
+
 const listaTarefas = JSON.parse(localStorage.getItem('ListaTarefas')) || [];
 
 function atualizarTarefas () {
@@ -79,3 +81,12 @@ listaTarefas.forEach(tarefa => {
     ulTarefas.append(elementoTarefa);
     
 });
+
+const limparFormulario = () => {
+
+    formTextArea.removeAttribute('value');
+    formAdicionarTarefa.classList.add('hidden');
+
+};
+
+botaoCancelForm.addEventListener('click', limparFormulario);
