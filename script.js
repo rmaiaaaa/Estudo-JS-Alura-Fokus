@@ -18,7 +18,7 @@ const tempoNaTela = document.querySelector('#timer');
 
 musicFile.loop = true;
 
-let tempoDecorridoEmSegundos = 1500;
+let tempoDecorridoEmSegundos = 5;
 let intervaloId = null;
 
 musicSwitch.addEventListener('change', () =>{
@@ -31,7 +31,7 @@ musicSwitch.addEventListener('change', () =>{
 })
 
 botaoFoco.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 1500;
+    tempoDecorridoEmSegundos = 5;
     alterarContexto(Constants.FOCO);
     botaoFoco.classList.add('active');
 });
@@ -88,6 +88,12 @@ const contagemRegressiva = () =>{
         beepSound.play();
         alert('Tempo finalizado!');
         zerarInterval();
+
+        //broadcast de evento
+        if (html.getAttribute('data-contexto') == Constants.FOCO){
+            const evento = new CustomEvent('FocoFinalizado');
+            document.dispatchEvent(evento);
+        }
         return;
     };
 

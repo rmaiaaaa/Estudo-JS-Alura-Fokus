@@ -5,7 +5,11 @@ const ulTarefas = document.querySelector('.app__section-task-list');
 
 const botaoCancelForm = document.querySelector('.app__form-footer__button--cancel');
 
+const paragrafoDescricaoTarefa = document.querySelector('.app__section-active-task-description');
+
 const listaTarefas = JSON.parse(localStorage.getItem('ListaTarefas')) || [];
+let tarefaSelecionada = null;
+let liTarefaSelecionada = null;
 
 function atualizarTarefas () {
     localStorage.setItem('ListaTarefas', JSON.stringify(listaTarefas));
@@ -51,9 +55,29 @@ function criarElementoTarefa(tarefa) {
     li.append(paragrafo);
     li.append(botao);
 
+
+    li.onclick = () => {
+
+        document.querySelectorAll('.app__section-task-list-item-active').forEach(elemento => {
+            elemento.classList.remove('app__section-task-list-item-active');
+        });
+
+        if (tarefa == tarefaSelecionada){
+            paragrafoDescricaoTarefa.textContent = '';
+            tarefaSelecionada = null;
+            liTarefaSelecionada = null;
+            return;
+        }
+
+        tarefaSelecionada = tarefa;
+        liTarefaSelecionada = li;
+        paragrafoDescricaoTarefa.textContent = tarefa.descricao;
+        li.classList.add('app__section-task-list-item-active');
+    }
+
     return li;
 
-}
+};
 
 botaoAdicionarTarefa.addEventListener('click', () => {
     formAdicionarTarefa.classList.toggle('hidden');
@@ -90,3 +114,16 @@ const limparFormulario = () => {
 };
 
 botaoCancelForm.addEventListener('click', limparFormulario);
+
+document.addEventListener('FocoFinalizado', () => {
+
+    const condicao = tarefaSelecionada && liTarefaSelecionada;
+    if (!condicao) {
+        return;
+    }
+
+    liTarefaSelecionada.classList.remove('app__section-task-list-item-active');
+    liTarefaSelecionada.classList.add('app__section-task-list-item-complete');
+    liTarefaSelecionada.querySelector('.button').setAttribute('disabled', 'disabled');
+
+})
