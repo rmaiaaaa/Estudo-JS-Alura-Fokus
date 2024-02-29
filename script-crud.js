@@ -124,6 +124,6 @@ document.addEventListener('FocoFinalizado', () => {
 
     liTarefaSelecionada.classList.remove('app__section-task-list-item-active');
     liTarefaSelecionada.classList.add('app__section-task-list-item-complete');
-    liTarefaSelecionada.querySelector('.button').setAttribute('disabled', 'disabled');
+    liTarefaSelecionada.querySelector('button').setAttribute('disabled', 'disabled');
 
 })
