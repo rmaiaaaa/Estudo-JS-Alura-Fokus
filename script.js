@@ -18,7 +18,7 @@ const tempoNaTela = document.querySelector('#timer');
 
 musicFile.loop = true;
 
-let tempoDecorridoEmSegundos = 5;
+let tempoDecorridoEmSegundos = 1500;
 let intervaloId = null;
 
 musicSwitch.addEventListener('change', () =>{
